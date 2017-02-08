@@ -1,7 +1,7 @@
 import java.util.EmptyStackException;
 
 public final class FixedArrayStack<T> implements StackInterface<T> {
-    private final T[] stack;
+    private T[] stack;
     private int topIndex;
     private final int MAX_CAPACITY = 10;
 
