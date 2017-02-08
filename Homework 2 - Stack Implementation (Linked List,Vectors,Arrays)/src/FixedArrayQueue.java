@@ -30,19 +30,21 @@ public class FixedArrayQueue<T> implements QueueInterface<T> {
     }
 
     private void ensureCapacity() {
-        T[] oldQueue = queue;
-        int oldSize = oldQueue.length;
-        int newSize = oldSize * 2;
-        checkCapacity(newSize);
-        @SuppressWarnings("unchecked")
-        T[] tempQueue = (T[]) new Object[newSize];
-        queue = tempQueue;
-        for (int index = 0; index < oldSize - 1; index++) {
-            queue[index] = oldQueue[frontIndex];
-            frontIndex = (frontIndex + 1) % oldSize;
+        if (frontIndex == ((backIndex + 2) % queue.length)) {
+            T[] oldQueue = queue;
+            int oldSize = oldQueue.length;
+            int newSize = oldSize * 2;
+            checkCapacity(newSize);
+            @SuppressWarnings("unchecked")
+            T[] tempQueue = (T[]) new Object[newSize];
+            queue = tempQueue;
+            for (int index = 0; index < oldSize - 1; index++) {
+                queue[index] = oldQueue[frontIndex];
+                frontIndex = (frontIndex + 1) % oldSize;
+            }
+            frontIndex = 0;
+            backIndex = oldSize - 2;
         }
-        frontIndex = 0;
-        backIndex = oldSize - 2;
     }
 
     private void checkCapacity(int newSize) {
