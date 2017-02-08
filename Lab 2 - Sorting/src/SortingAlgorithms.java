@@ -18,7 +18,6 @@ public class SortingAlgorithms {
             swap(array, first, minimumIndex);
             selectionSortR(array, first + 1, last);
         }
-
     }
 
 
