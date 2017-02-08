@@ -38,18 +38,23 @@ public class StackTest {
 //        System.out.println(integerLinkedListStack.pop());
 //        System.out.println(integerLinkedListStack.isEmpty());
 
-        fixedArrayQueue.enqueue(14);
-        System.out.println(fixedArrayQueue.isEmpty());
-        System.out.println(fixedArrayQueue.dequeue());
-        fixedArrayQueue.enqueue(144);
-        fixedArrayQueue.enqueue(1554);
-        fixedArrayQueue.enqueue(555514);
-        fixedArrayQueue.clear();
+            fixedArrayQueueTest();
 
 
 
 
 
+    }
+
+    public static void fixedArrayQueueTest(){
+//        fixedArrayQueue.enqueue(14);
+//        System.out.println(fixedArrayQueue.isEmpty());
+//        System.out.println(fixedArrayQueue.dequeue());
+//        fixedArrayQueue.enqueue(144);
+//        fixedArrayQueue.enqueue(1554);
+//        fixedArrayQueue.enqueue(555514);
+//        fixedArrayQueue.clear();
+        fixedArrayQueue.dequeue();
     }
 
 
