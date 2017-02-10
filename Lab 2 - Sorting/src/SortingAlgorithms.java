@@ -1,18 +1,27 @@
-/**
- * Created by Michael on 2/4/2017.
- */
 public class SortingAlgorithms {
 
-    public void selctionSort(){
-       // int minimumIndex = first;
+    public void selectionSort(int[] array) {
+
+        for (int sortedIndex = 0; sortedIndex < array.length - 1; sortedIndex++) {
+            for (int unsortedIndex = sortedIndex + 1; unsortedIndex < array.length; unsortedIndex++) {
+                int minimumIndex = sortedIndex;
+                if (array[unsortedIndex] < array[minimumIndex]) {
+                    minimumIndex = unsortedIndex;
+                }
+                int temp = array[minimumIndex];
+                array[minimumIndex] = array[sortedIndex];
+                array[sortedIndex] = temp;
+
+            }
+        }
     }
 
     public void selectionSortR(int[] array, int first, int last) {
         int minimumIndex = first;
         if (first < last) {
-            for (int index = first + 1; index < array.length; index++) {
-                if (array[first] < array[index]) {
-                    minimumIndex = index;
+            for (int unsortedIndex = first + 1; unsortedIndex < array.length; unsortedIndex++) {
+                if (array[unsortedIndex] < array[minimumIndex]) {
+                    minimumIndex = unsortedIndex;
                 }
             }
             swap(array, first, minimumIndex);

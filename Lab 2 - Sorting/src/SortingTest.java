@@ -8,10 +8,12 @@ public class SortingTest {
 
     public static void main(String[] args) {
         SortingAlgorithms sortingAlgoObj = new SortingAlgorithms();
-        sortingAlgoObj.selectionSortR(array1, 0, array1.length - 1);
+       // sortingAlgoObj.selectionSortR(array1, 0, array1.length - 1);
+        //sortingAlgoObj.selectionSort(array1);
 
         if (Arrays.equals(array1, correctArray1)) {
             System.out.println("Passed");
+            printArrays(array1, correctArray1);
         } else {
             System.out.println("****Failed*****");
             printArrays(array1, correctArray1);
