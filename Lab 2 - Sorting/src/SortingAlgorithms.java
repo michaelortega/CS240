@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SortingAlgorithms {
 
@@ -108,79 +109,35 @@ public class SortingAlgorithms {
 
 
     }
+
+
+
+
+
+
     /* *************************/
-
-
-    public static void quickSortR(int[] array, int low, int right) {
-        if (array == null || array.length == 0)
-            return;
-
-        if (low >= right)
-            return;
-
-        int middle = low + (right - low) / 2;
-        int pivot = array[middle];
-
-        int left = low, j = right;
-        while (left <= j) {
-            while (array[left] < pivot) {
-                left++;
-            }
-
-            while (array[j] > pivot) {
-                j--;
-            }
-
-            if (left <= j) {
-                int temp = array[left];
-                array[left] = array[j];
-                array[j] = temp;
-                left++;
-                j--;
+    private int partition(int[] a, int start, int end){
+        Random ran = new Random();
+        int index = start+ran.nextInt(end - start + 1); //set random index pivot value
+        int pivot = a[index];//sets the random pivot value
+        swap(a,index, end); // puts random pivot value at the end of array
+        index = start; // set partition index to the beginning of the array
+        for (int i= start; i < end; i++) {
+            if (a[i]<pivot) {
+                swap(a,index, i);
+                index++;
             }
         }
-        if (low < j)
-            quickSortR(array, low, j);
-
-        if (right > left)
-            quickSortR(array, left, right);
+        swap(a,index, end);
+        return index;
     }
 
-    private int partition(int arr[], int low, int high)
-    {
-        int pivot = arr[high];
-        int smallestIndex = (low-1); // index of smaller element
-        for (int j=low; j<=high-1; j++)
-        {
-            if (arr[j] <= pivot)
-            {
-                smallestIndex++;
 
-                // swap arr[smallestIndex] and arr[j]
-                int temp = arr[smallestIndex];
-                arr[smallestIndex] = arr[j];
-                arr[j] = temp;
-            }
-        }
-
-        int temp = arr[smallestIndex+1];
-        arr[smallestIndex+1] = arr[high];
-        arr[high] = temp;
-
-        return smallestIndex+1;
-    }
-
-    /*
-      arr[] --> Array to be sorted,
-      low  --> Starting index,
-      high  --> Ending index */
-    public void quickSort(int arr[], int low, int high)
-    {
-        if (low < high)
-        {
-            int partitionIndex = partition(arr, low, high);
-            quickSort(arr, low, partitionIndex-1);
-            quickSort(arr, partitionIndex+1, high);
+    public void qSort(int[] a, int start, int end){
+        if(end > start){
+            int index = partition(a,start,end);
+            qSort(a, start, index - 1);
+            qSort(a, index + 1, end);
         }
     }
     //*****************
@@ -213,6 +170,33 @@ public class SortingAlgorithms {
             }
             // move to next digit
             placement *= RAD;
+        }
+    }
+
+
+    public void shellSort(int [] array) {
+        int i, j, k, h, hCount, increments[] = new int[10];
+        // create an number of increments h
+        for (h = 1, i = 0; h < array.length; i++) {
+            increments[i] = h;
+            h = 2 * i + 1;
+        }
+        // loop on the number of different increments h
+        for (i--; i >= 0; i--) {
+            h = increments[i];
+
+            for (hCount = h; hCount < 2 * h; hCount++) {
+                for (j = hCount; j < array.length; ) {
+                    int tmp =  array[j];
+                    k = j;
+                    while (k - h >= 0 && tmp <array[k - h] ) {
+                        array[k] = array[k - h];
+                        k -= h;
+                    }
+                    array[k] = tmp;
+                    j += h;
+                }
+            }
         }
     }
 

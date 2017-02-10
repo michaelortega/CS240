@@ -2,8 +2,6 @@ import java.util.Arrays;
 
 public class SortingTest {
     private static int[] array1 = {3, -3, 0, 19, 35, 500, 5, 45, 45, 90};
-    private static int[] array2 = {3, -3, 0, 19, 35, 500, 5, 45, 45, 90};
-    private static int[] array3 = {3, -3, 0, 19, 35, 500, 5, 45, 45, 90};
     private static int[] correctArray1 = {-3, 0, 3, 5, 19, 35, 45, 45, 90, 500};
 
 
@@ -11,9 +9,10 @@ public class SortingTest {
         SortingAlgorithms sortingAlgoObj = new SortingAlgorithms();
        // sortingAlgoObj.selectionSortR(array1, 0, array1.length - 1);
         //sortingAlgoObj.selectionSort(array1);
-        sortingAlgoObj.insertionSortR(array1,0, array1.length -1);
-        sortingAlgoObj.mergeSortR(array1, array2,0, array1.length - 1 );
-        sortingAlgoObj.quickSort(array1, 0 , array1.length - 1);
+        //sortingAlgoObj.insertionSortR(array1,0, array1.length -1);
+        //sortingAlgoObj.mergeSortR(array1, array2,0, array1.length - 1 );
+        //sortingAlgoObj.qSort(array1, 0 , array1.length - 1);
+        sortingAlgoObj.shellSort(array1);
 
         if (Arrays.equals(array1, correctArray1)) {
             System.out.println("Passed");
