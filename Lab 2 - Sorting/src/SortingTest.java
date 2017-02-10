@@ -13,6 +13,7 @@ public class SortingTest {
        // sortingAlgoObj.selectionSortR(array1, 0, array1.length - 1);
         //sortingAlgoObj.selectionSort(array1);
         sortingAlgoObj.insertionSortR(array1,0, array1.length -1);
+        sortingAlgoObj.mergeSortR(array1, array2,0, array1.length - 1 );
 
         if (Arrays.equals(array1, correctArray1)) {
             System.out.println("Passed");

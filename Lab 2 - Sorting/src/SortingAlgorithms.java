@@ -70,4 +70,40 @@ public class SortingAlgorithms {
 
     }
     //**********************
+    /*       Merge Sort     */
+
+    public void mergeSortR(int [] array, int [] temp, int left , int right){
+        if (left < right){
+            int center = (left + right) / 2;
+            mergeSortR(array,temp,left, center);
+            mergeSortR(array,temp, center + 1, right);
+            merge(array,temp,left,center + 1,right);
+        }
+    }
+
+    private void merge(int[] array, int[] temp, int leftPos, int rightPos , int rightEnd) {
+        int leftEnd = rightPos - 1;
+        int tempPos = leftPos;
+        int numElements = rightEnd - leftPos + 1;
+
+        while (leftPos <= leftEnd && rightPos <= rightEnd){
+            if (array[leftPos] < array[rightPos]){
+                temp[tempPos++] = array[leftPos++];
+
+            } else{
+                temp[tempPos] = array[rightPos];
+            }
+            while (leftPos <= leftEnd){
+                temp[tempPos++] = array[leftPos++];
+            }
+            while (rightPos <= rightEnd)
+                temp[tempPos++] = array[rightPos++];
+            for (int i = 0; i < numElements; i++, rightEnd--){
+                array[rightEnd] = temp[rightEnd];
+            }
+        }
+
+
+    }
+
 }
