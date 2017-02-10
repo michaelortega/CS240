@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Arrays;
 
 public class SortingTest {
@@ -14,6 +13,7 @@ public class SortingTest {
         //sortingAlgoObj.selectionSort(array1);
         sortingAlgoObj.insertionSortR(array1,0, array1.length -1);
         sortingAlgoObj.mergeSortR(array1, array2,0, array1.length - 1 );
+        sortingAlgoObj.quickSort(array1, 0 , array1.length - 1);
 
         if (Arrays.equals(array1, correctArray1)) {
             System.out.println("Passed");

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SortingAlgorithms {
 
     public void selectionSort(int[] array) {
@@ -104,6 +107,113 @@ public class SortingAlgorithms {
         }
 
 
+    }
+    /* *************************/
+
+
+    public static void quickSortR(int[] array, int low, int right) {
+        if (array == null || array.length == 0)
+            return;
+
+        if (low >= right)
+            return;
+
+        int middle = low + (right - low) / 2;
+        int pivot = array[middle];
+
+        int left = low, j = right;
+        while (left <= j) {
+            while (array[left] < pivot) {
+                left++;
+            }
+
+            while (array[j] > pivot) {
+                j--;
+            }
+
+            if (left <= j) {
+                int temp = array[left];
+                array[left] = array[j];
+                array[j] = temp;
+                left++;
+                j--;
+            }
+        }
+        if (low < j)
+            quickSortR(array, low, j);
+
+        if (right > left)
+            quickSortR(array, left, right);
+    }
+
+    private int partition(int arr[], int low, int high)
+    {
+        int pivot = arr[high];
+        int smallestIndex = (low-1); // index of smaller element
+        for (int j=low; j<=high-1; j++)
+        {
+            if (arr[j] <= pivot)
+            {
+                smallestIndex++;
+
+                // swap arr[smallestIndex] and arr[j]
+                int temp = arr[smallestIndex];
+                arr[smallestIndex] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[smallestIndex+1];
+        arr[smallestIndex+1] = arr[high];
+        arr[high] = temp;
+
+        return smallestIndex+1;
+    }
+
+    /*
+      arr[] --> Array to be sorted,
+      low  --> Starting index,
+      high  --> Ending index */
+    public void quickSort(int arr[], int low, int high)
+    {
+        if (low < high)
+        {
+            int partitionIndex = partition(arr, low, high);
+            quickSort(arr, low, partitionIndex-1);
+            quickSort(arr, partitionIndex+1, high);
+        }
+    }
+    //*****************
+    public void radixsort(int[] input) {
+        final int RAD = 10;
+        // declare and initialize bucket[]
+        List<Integer>[] bucket = new ArrayList[RAD];
+        for (int i = 0; i < bucket.length; i++) {
+            bucket[i] = new ArrayList<>();
+        }
+
+
+        boolean maxLength = false;
+        int temp = -1, placement = 1;
+        while (!maxLength) {
+            maxLength = true;
+            for (Integer i : input) {
+                temp = i / placement;
+                bucket[temp % RAD].add(i);
+                if (maxLength && temp > 0) {
+                    maxLength = false;
+                }
+            }
+            int a = 0;
+            for (int b = 0; b < RAD; b++) {
+                for (Integer i : bucket[b]) {
+                    input[a++] = i;
+                }
+                bucket[b].clear();
+            }
+            // move to next digit
+            placement *= RAD;
+        }
     }
 
 }
