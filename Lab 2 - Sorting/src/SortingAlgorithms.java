@@ -35,4 +35,39 @@ public class SortingAlgorithms {
         array[lowestIndex] = array[index];
         array[index] = temp;
     }
+    //***************************
+
+    public void insertionSort(int[] array) {
+        for (int unsortedIndex = 1; unsortedIndex < array.length; unsortedIndex++) {
+            int indexToInsert = array[unsortedIndex];
+            int sortedEnd = unsortedIndex - 1;
+            while ((sortedEnd >= 0) && (indexToInsert < array[sortedEnd])) {
+                array[sortedEnd + 1] = array[sortedEnd]; // move to right
+                sortedEnd--;
+            }
+            array[sortedEnd + 1] = indexToInsert;
+        }
+    }
+
+    public void insertionSortR(int[] array, int first, int last){
+        if (first < last){
+            insertionSortR(array,first,last - 1);
+            insertInOrder(array[last], array, first, last - 1);
+        }
+
+    }
+
+    private void insertInOrder(int nextToInsert, int[] array, int begin, int end) {
+        if (nextToInsert >= array[end]){
+            array[end + 1] = nextToInsert;
+        } else if (begin < end){
+            array[end + 1] = array[end];
+            insertInOrder(nextToInsert,array,begin,end - 1);
+        } else {
+            array[end + 1] = array[end];
+            array[end] = nextToInsert;
+        }
+
+    }
+    //**********************
 }
