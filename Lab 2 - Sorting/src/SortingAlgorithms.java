@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Random;
 
 public class SortingAlgorithms {
+    public static int countMove=0;
+    public static   int countCompare=0;
+
 
     public void selectionSort(int[] array) {
 
@@ -29,6 +32,7 @@ public class SortingAlgorithms {
                 }
             }
             swap(array, first, minimumIndex);
+
             selectionSortR(array, first + 1, last);
         }
     }
@@ -46,10 +50,13 @@ public class SortingAlgorithms {
             int indexToInsert = array[unsortedIndex];
             int sortedEnd = unsortedIndex - 1;
             while ((sortedEnd >= 0) && (indexToInsert < array[sortedEnd])) {
+                countCompare++;
                 array[sortedEnd + 1] = array[sortedEnd]; // move to right
+                countMove++;
                 sortedEnd--;
             }
             array[sortedEnd + 1] = indexToInsert;
+            countMove++;
         }
     }
 
@@ -109,6 +116,132 @@ public class SortingAlgorithms {
 
 
     }
+
+
+
+    /* Iterative mergesort function to sort arr[0...n-1] */
+    void mergeSort(int arr[], int n)
+    {
+        int curr_size;
+        int left_start; // For picking starting index of left subarray
+        for (curr_size=1; curr_size<=n-1; curr_size = 2*curr_size)
+        {
+
+            for (left_start=0; left_start<n-1; left_start += 2*curr_size)
+            {
+                int mid = left_start + curr_size - 1;
+
+                int right_end = Math.min(left_start + 2*curr_size - 1, n-1);
+
+                mergeI(arr, left_start, mid, right_end);
+            }
+        }
+    }
+
+    void mergeI(int arr[], int l, int mid, int r)
+    {
+        int i, j, k;
+        int leftTempSize = mid - l + 1;
+        int rightTempSize =  r - mid;
+
+    /* create temp arrays */
+        int [] leftArray = new int[leftTempSize];
+        int [] rightArray = new int[rightTempSize];
+
+    /* Copy data to temp arrays leftArray[] and rightArray[] */
+        for (i = 0; i < leftTempSize; i++)
+            leftArray[i] = arr[l + i];
+        for (j = 0; j < rightTempSize; j++)
+            rightArray[j] = arr[mid + 1+ j];
+
+    /* Merge the temp arrays*/
+        i = 0;
+        j = 0;
+        k = l;
+        while (i < leftTempSize && j < rightTempSize)
+        {
+            if (leftArray[i] <= rightArray[j])
+            {
+                arr[k] = leftArray[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = rightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+    /* Copy the remaining elements of leftArray[]*/
+        while (i < leftTempSize)
+        {
+            arr[k] = leftArray[i];
+            i++;
+            k++;
+        }
+
+    /* Copy the remaining elements of rightArray[]*/
+        while (j < rightTempSize)
+        {
+            arr[k] = rightArray[j];
+            j++;
+            k++;
+        }
+    }
+
+
+    void mergeSortI(int array[], int n)
+    {
+        int currentSize;  // For current size of subarrays to be merged
+        int startLeft; // For picking starting index of left subarray
+
+        for (currentSize=1; currentSize<=n-1; currentSize = 2*currentSize)
+        {
+            for (startLeft=0; startLeft<n-1; startLeft += 2*currentSize)
+            {
+                int mid = startLeft + currentSize - 1;
+
+                int right_end = Math.min(startLeft + 2*currentSize - 1, n-1);
+
+                mergeI(array, startLeft, mid, right_end);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
