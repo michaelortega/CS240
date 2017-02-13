@@ -27,11 +27,11 @@ public class VectorList<T> implements ListInterface<T> {
      * Adds a new entry to the list at a given position.
      *
      * @param newEntry     object to be added as a new entry
-     * @param givenPostion An integer that indicates the position of the entry to be added.
+     * @param givenPosition An integer that indicates the position of the entry to be added.
      */
     @Override
-    public void add(T newEntry, int givenPostion) {
-        list.add(givenPostion,newEntry);
+    public void add(T newEntry, int givenPosition) {
+        list.add(givenPosition,newEntry);
     }
 
     /**

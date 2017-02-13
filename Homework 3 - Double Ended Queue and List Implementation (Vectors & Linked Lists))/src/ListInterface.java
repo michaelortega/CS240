@@ -11,9 +11,9 @@ public interface ListInterface <T> {
     /**
      * Adds a new entry to the list at a given position.
      * @param newEntry object to be added as a new entry
-     * @param givenPostion An integer that indicates the position of the entry to be added.
+     * @param givenPosition An integer that indicates the position of the entry to be added.
      */
-    public void add(T newEntry, int givenPostion);
+    public void add(T newEntry, int givenPosition);
 
     /**
      * Removes an entry from the list at a given position
