@@ -43,7 +43,7 @@ public interface ListInterface <T> {
      * @return A reference to the indicated entry.
      * @throws IndexOutOfBoundsException if either givenPosition < 1 or givenPosition > {@link #getCount()}
      */
-    public T getEntry(T givenPosition);
+    public T getEntry(int givenPosition);
 
     /**
      * Retries all entries that are in this list in the order in which they occur in the list.
