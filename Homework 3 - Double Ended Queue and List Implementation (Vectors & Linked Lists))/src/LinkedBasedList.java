@@ -4,7 +4,7 @@ public class LinkedBasedList<T> implements ListInterface<T> {
     private Node tail;
     private int numberOfEntries;
 
-    public LinkedBasedList(){
+    public LinkedBasedList() {
         head = null;
         tail = null;
         numberOfEntries = 0;
@@ -40,8 +40,9 @@ public class LinkedBasedList<T> implements ListInterface<T> {
         Node newNode = new Node(newEntry, null);
         if (isEmpty()) {
             head = newNode;
+            tail = newNode;
             numberOfEntries++;
-        } else if (givenPosition == 1 && !(isEmpty())) {
+        } else if (givenPosition == 1) {
             newNode.setNextNode(head);
             head = newNode;
             numberOfEntries++;
@@ -50,13 +51,17 @@ public class LinkedBasedList<T> implements ListInterface<T> {
             Node nodeBefore = getNodeBefore(givenPosition);
             newNode.setNextNode(getNodeAt(givenPosition));
             nodeBefore.setNextNode(newNode);
+            if (givenPosition == numberOfEntries) {
+                tail = newNode;
+            }
             numberOfEntries++;
         }
-
     }
-    private Node getNodeAt(int givenPosition){
+
+    private Node getNodeAt(int givenPosition) {
         return getNodeBefore(givenPosition).getNextNode();
     }
+
     private Node getNodeBefore(int givenPosition) {
         Node currentNode = head;
         int count = 1;
@@ -67,7 +72,7 @@ public class LinkedBasedList<T> implements ListInterface<T> {
         return currentNode;
     }
 
-    private void checkValidIndex(int givenPosition){
+    private void checkValidIndex(int givenPosition) {
         if (givenPosition < 0 || givenPosition > getCount())
             throw new IndexOutOfBoundsException();
     }
@@ -87,6 +92,12 @@ public class LinkedBasedList<T> implements ListInterface<T> {
             T tempData = tempNode.getData();
             head = head.getNextNode();
             tempNode.setNextNode(null);
+            return tempData;
+        } else if (givenPosition == numberOfEntries) {
+            T tempData = getEntry(givenPosition);
+            Node nodeBefore = getNodeBefore(givenPosition);
+            nodeBefore.setNextNode(null);
+            tail = nodeBefore;
             return tempData;
         } else {
 
@@ -150,7 +161,7 @@ public class LinkedBasedList<T> implements ListInterface<T> {
     @Override
     public void display() {
         Node currentNode = head;
-        while (currentNode != null){
+        while (currentNode != null) {
             System.out.print(currentNode.getData() + " ");
             currentNode = currentNode.getNextNode();
         }
@@ -166,8 +177,8 @@ public class LinkedBasedList<T> implements ListInterface<T> {
     @Override
     public boolean contains(T anEntry) {
         Node current = head;
-        while (current != null){
-            if (current.getData().equals(anEntry)){
+        while (current != null) {
+            if (current.getData().equals(anEntry)) {
                 return true;
             }
             current = current.getNextNode();
@@ -195,11 +206,11 @@ public class LinkedBasedList<T> implements ListInterface<T> {
         return head == null;
     }
 
-    private class Node{
+    private class Node {
         private Node next;
         private T data;
 
-        public Node(T data, Node next){
+        public Node(T data, Node next) {
             this.data = data;
             this.next = next;
         }
