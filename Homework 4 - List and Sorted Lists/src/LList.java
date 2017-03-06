@@ -1,5 +1,4 @@
-import Homework3.LinkedBasedList;
-public class LList<T> implements ListInterface<T> {
+public class LList<T extends Comparable<? super T>> implements ListInterface<T> {
     private Node head;
     private int numberOfEntries;
 
@@ -7,8 +6,10 @@ public class LList<T> implements ListInterface<T> {
         head = null;
         numberOfEntries =0;
     }
-
-    private Node getNodeBefore(int givenPosition) {
+    public void incrementEntries(){
+        numberOfEntries++;
+    }
+    public Node getNodeBefore(int givenPosition) {
         Node currentNode = head;
         int count = 1;
         while (count + 1 < givenPosition) {
@@ -18,11 +19,11 @@ public class LList<T> implements ListInterface<T> {
         return currentNode;
     }
 
-    private Node getNodeAt(int givenPosition) {
+    public Node getNodeAt(int givenPosition) {
         return getNodeBefore(givenPosition).getNextNode();
     }
 
-    private void emptyAdd(T newEntry){
+    public void emptyAdd(T newEntry){
         Node newNode = new Node(newEntry, null);
         head = newNode;
         numberOfEntries++;
@@ -44,6 +45,10 @@ public class LList<T> implements ListInterface<T> {
         lastNode.setNextNode(newNode);
         numberOfEntries++;
         }
+    }
+
+    public Node getHead(){
+        return head;
     }
 
     /**
@@ -218,7 +223,7 @@ public class LList<T> implements ListInterface<T> {
     public boolean isEmpty() {
         return head == null;
     }
-    private class Node {
+    public class Node {
         private Node next;
         private T data;
 
