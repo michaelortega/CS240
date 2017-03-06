@@ -1,3 +1,5 @@
+package Homework3;
+
 /**
  * Created by Michael on 2/12/2017.
  */

@@ -1,3 +1,5 @@
+package Homework3;
+
 import java.util.Vector;
 
 public class VectorList<T> implements ListInterface<T> {
@@ -113,7 +115,7 @@ public class VectorList<T> implements ListInterface<T> {
     /**
      * Returns the number of entrys that are in this list.
      *
-     * @return An integer number representing the amount of entries in this list
+     * @return An integer number representing the amount oREHGf entries in this list
      */
     @Override
     public int getCount() {

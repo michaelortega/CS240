@@ -1,3 +1,5 @@
+package Homework2;
+
 public class FixedArrayQueue<T> implements QueueInterface<T> {
     private T[] queue;
     private int frontIndex;

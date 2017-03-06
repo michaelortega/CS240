@@ -1,3 +1,5 @@
+package Homework2;
+
 import java.util.EmptyStackException;
 
 public final class FixedArrayStack<T> implements StackInterface<T> {

@@ -1,3 +1,5 @@
+package Homework2;
+
 /**
  An interface for the ADT stack.
  @author Frank M. Carrano
@@ -26,4 +28,4 @@ public interface StackInterface<T>
 
     /** Removes all entries from this stack. */
     public void clear();
-} // end StackInterface
+} // end Homework2.StackInterface

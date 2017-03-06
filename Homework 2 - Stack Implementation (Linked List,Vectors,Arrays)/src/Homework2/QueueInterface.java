@@ -1,3 +1,4 @@
+package Homework2;
 
 public interface QueueInterface<T>
 {
@@ -21,4 +22,4 @@ public interface QueueInterface<T>
 
     /** Removes all entries from this queue. */
     public void clear();
-} // end QueueInterface
+} // end Homework2.QueueInterface

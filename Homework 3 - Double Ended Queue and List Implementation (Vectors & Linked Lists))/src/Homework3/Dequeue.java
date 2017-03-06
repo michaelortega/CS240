@@ -1,3 +1,7 @@
+package Homework3;
+
+import Homework2.EmptyQueueException;
+
 // Michael Ortega HWK - 3 (PART 1)
 public class Dequeue<T> implements DequeueInterface<T> {
     private Node head;

@@ -1,22 +1,16 @@
+package Homework2;
+
 import java.util.EmptyStackException;
-import java.util.Vector;
 
 /**
- * Created by Michael on 2/6/2017.
+ * Created by Michael on 2/7/2017.
  */
-public class VectorStack<T> implements StackInterface<T> {
-    private final Vector<T> stack;
-    private static final int MAX_CAPACITY = 10000;
-    private static final int DEFAULT_CAPACITY = 50;
+public final class LinkedListStack<T> implements StackInterface<T> {
+    private Node head;
 
-    public VectorStack() {
-        this(DEFAULT_CAPACITY);
+    public LinkedListStack() {
+        head = null;
     }
-
-    public VectorStack(int initialCapacity) {
-        stack = new Vector<>(initialCapacity);
-    }
-
 
     /**
      * Adds a new entry to the top of this stack.
@@ -25,7 +19,10 @@ public class VectorStack<T> implements StackInterface<T> {
      */
     @Override
     public void push(T newEntry) {
-        stack.add(newEntry);
+        Node newNode = new Node(newEntry);
+        newNode.setNext(head);
+        head = newNode;
+
     }
 
     /**
@@ -39,7 +36,9 @@ public class VectorStack<T> implements StackInterface<T> {
         if (isEmpty()) {
             throw new EmptyStackException();
         } else {
-            return stack.remove(stack.size() - 1);
+            T tempData = peek();
+            head = head.getNext();
+            return tempData;
         }
     }
 
@@ -54,7 +53,7 @@ public class VectorStack<T> implements StackInterface<T> {
         if (isEmpty()) {
             throw new EmptyStackException();
         } else {
-            return stack.lastElement();
+            return head.getData();
         }
     }
 
@@ -65,7 +64,7 @@ public class VectorStack<T> implements StackInterface<T> {
      */
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return head == null;
     }
 
     /**
@@ -73,6 +72,29 @@ public class VectorStack<T> implements StackInterface<T> {
      */
     @Override
     public void clear() {
-        stack.clear();
+        head = null;
     }
+
+
+    private class Node {
+        private T data;
+        private Node next;
+
+        private Node(T data) {
+            this.data = data;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public T getData() {
+            return data;
+        }
+    }
+
 }

@@ -1,3 +1,4 @@
+package Homework2;
 
 public class EmptyQueueException extends RuntimeException {
     public EmptyQueueException(){

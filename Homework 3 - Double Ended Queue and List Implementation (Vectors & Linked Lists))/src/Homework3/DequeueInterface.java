@@ -1,3 +1,7 @@
+package Homework3;
+
+import Homework2.EmptyQueueException;
+
 public interface DequeueInterface<T> {
     /**
      * Adds a nw entry to the front/back of this deque

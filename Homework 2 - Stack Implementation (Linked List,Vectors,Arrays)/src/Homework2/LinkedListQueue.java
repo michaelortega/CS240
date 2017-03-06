@@ -1,19 +1,17 @@
+package Homework2;
+
 /**
  * Created by Michael on 2/8/2017.
  */
-public class CircularLinkedList<T> implements QueueInterface<T> {
-
-    private final int MAX_SIZE = 10;
-    private int numberOfNodes;
+public class LinkedListQueue<T> implements QueueInterface<T> {
+    private Node tail;
     private Node head;
-    private Node emptyNode;
 
-    public CircularLinkedList(){
-        emptyNode = new Node(null);
-        emptyNode.setNext(emptyNode);
-        head = emptyNode;
-        numberOfNodes = 1;
+    public LinkedListQueue(){
+        tail = null;
+        head = null;
     }
+
     /**
      * Adds a new entry to the back of this queue.
      *
@@ -21,16 +19,14 @@ public class CircularLinkedList<T> implements QueueInterface<T> {
      */
     @Override
     public void enqueue(T newEntry) {
-        if (numberOfNodes < MAX_SIZE) {
-            emptyNode.setData(newEntry);
-            if (isChainFull()) {
-                Node newNode = new Node(null);
-                newNode.setNext(head.getNext());
-                emptyNode.setNext(newNode);
-            }
-            emptyNode = emptyNode.getNext();
-            numberOfNodes++;
+        Node newNode = new Node(newEntry);
+        if (isEmpty()) {
+            head = newNode;
+        } else {
+            tail.setNext(newNode);
         }
+
+        tail = newNode;
     }
 
     /**
@@ -41,13 +37,18 @@ public class CircularLinkedList<T> implements QueueInterface<T> {
      */
     @Override
     public T dequeue() {
-        if (!isEmpty()) {
-            T temp = head.getData();
+        if (isEmpty()){
+            throw new EmptyQueueException();
+        } else {
+            T temp = getFront();
             head.setData(null);
             head = head.getNext();
+            if (head == null){
+                tail = null;
+            }
             return temp;
         }
-        throw new EmptyQueueException();
+        
     }
 
     /**
@@ -58,11 +59,10 @@ public class CircularLinkedList<T> implements QueueInterface<T> {
      */
     @Override
     public T getFront() {
-        if (isEmpty()){
+        if (isEmpty())
             throw new EmptyQueueException();
-        } else {
+        else
             return head.getData();
-        }
     }
 
     /**
@@ -72,7 +72,7 @@ public class CircularLinkedList<T> implements QueueInterface<T> {
      */
     @Override
     public boolean isEmpty() {
-        return head == emptyNode;
+        return (head == null) && (tail == null);
     }
 
     /**
@@ -80,15 +80,10 @@ public class CircularLinkedList<T> implements QueueInterface<T> {
      */
     @Override
     public void clear() {
-        while (!isEmpty()){
-            dequeue();
-        }
-    }
+        tail = null;
+        head = null;
 
-    public boolean isChainFull() {
-        return head == emptyNode.getNext();
     }
-
     private class Node{
         private T data;
         private Node next;
