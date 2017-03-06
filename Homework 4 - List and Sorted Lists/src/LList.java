@@ -2,13 +2,15 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
     private Node head;
     private int numberOfEntries;
 
-    public LList(){
+    public LList() {
         head = null;
-        numberOfEntries =0;
+        numberOfEntries = 0;
     }
-    public void incrementEntries(){
+
+    public void incrementEntries() {
         numberOfEntries++;
     }
+
     public Node getNodeBefore(int givenPosition) {
         Node currentNode = head;
         int count = 1;
@@ -23,11 +25,16 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
         return getNodeBefore(givenPosition).getNextNode();
     }
 
-    public void emptyAdd(T newEntry){
+    public void emptyAdd(T newEntry) {
         Node newNode = new Node(newEntry, null);
         head = newNode;
         numberOfEntries++;
     }
+
+    public void setHead(Node head) {
+        this.head = head;
+    }
+
     /**
      * Adds a new entry to the end of this list.
      * Entries currently in the list are unaffected.
@@ -37,17 +44,17 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
      */
     @Override
     public void add(T newEntry) {
-        if (isEmpty()){
+        if (isEmpty()) {
             emptyAdd(newEntry);
-        } else{
-        Node lastNode = getNodeAt(numberOfEntries);
-        Node newNode = new Node(newEntry, null);
-        lastNode.setNextNode(newNode);
-        numberOfEntries++;
+        } else {
+            Node lastNode = getNodeAt(numberOfEntries);
+            Node newNode = new Node(newEntry, null);
+            lastNode.setNextNode(newNode);
+            numberOfEntries++;
         }
     }
 
-    public Node getHead(){
+    public Node getHead() {
         return head;
     }
 
@@ -101,10 +108,10 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
             Node nodeToRemove = getNodeAt(givenPosition);
             T removedNodeData = nodeToRemove.getData();
             nodeToRemove.setData(null);
-            if (givenPosition == 1){ // remove at head
+            if (givenPosition == 1) { // remove at head
                 head = head.getNextNode();
                 nodeToRemove.setNextNode(null);
-            } else{ // remove middle and tail
+            } else { // remove middle and tail
                 Node nodeBefore = getNodeBefore(givenPosition);
                 nodeBefore.setNextNode(nodeToRemove.getNextNode());
                 nodeToRemove.setNextNode(null);
@@ -176,9 +183,9 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
     public T[] toArray() {
         @SuppressWarnings("unchecked")
         T[] result = (T[]) new Object[numberOfEntries];
-        int index =0;
-        Node currentNode= head;
-        while ((index < numberOfEntries) && (currentNode !=null)){
+        int index = 0;
+        Node currentNode = head;
+        while ((index < numberOfEntries) && (currentNode != null)) {
             result[index] = currentNode.getData();
             currentNode = currentNode.getNextNode();
             index++;
@@ -195,8 +202,8 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
     @Override
     public boolean contains(T anEntry) {
         Node currentNode = head;
-        while (currentNode != null){
-            if ((currentNode.getData()).equals(anEntry)){
+        while (currentNode != null) {
+            if ((currentNode.getData()).equals(anEntry)) {
                 return true;
             }
             currentNode = currentNode.getNextNode();
@@ -223,6 +230,7 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
     public boolean isEmpty() {
         return head == null;
     }
+
     public class Node {
         private Node next;
         private T data;
