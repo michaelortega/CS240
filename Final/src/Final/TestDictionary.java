@@ -16,7 +16,7 @@ public class TestDictionary {
         d.add(2,"fuck1");
         d.add(2,"fuck2");
 
-        d.testVI(1);
+        //d.testVI(1);
 
 
 
