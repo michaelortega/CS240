@@ -165,7 +165,7 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
      */
     @Override
     public T getEntry(int givenPosition) {
-        if (givenPosition >= 1 && givenPosition < numberOfEntries) {
+        if (givenPosition >= 1 && givenPosition <= numberOfEntries) {
             return getNodeAt(givenPosition).getData();
         } else {
             throw new IndexOutOfBoundsException();
