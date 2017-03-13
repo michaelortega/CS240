@@ -18,7 +18,7 @@ public class MyIterator<T> implements IteratorInterface {
 
     @Override
     public boolean hasNext() {
-        return nextPosition < list.getLength(); // get length returns the number of entries in the list
+        return nextPosition < list.getLength();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class MyIterator<T> implements IteratorInterface {
 
     @Override
     public void remove() {
-        if (wasNextCalled){ // checks in case we try to do a remove to a entry that is not in the list aka 0
+        if (wasNextCalled){
             list.remove(nextPosition);
             nextPosition--;
             wasNextCalled = false;

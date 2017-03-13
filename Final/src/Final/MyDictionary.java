@@ -243,12 +243,10 @@ public class MyDictionary<K, V> implements DictionaryInterface<K, V> {
     private class ValueIterator implements Iterator<V> {
         private ListInterface<V> valueList;
         private int nextPosition;
-        private boolean wasNextCalled;
 
         public ValueIterator(ListInterface<V> list) {
             valueList = list;
             nextPosition = 0;
-            wasNextCalled = false;
         }
 
         @Override
@@ -259,7 +257,6 @@ public class MyDictionary<K, V> implements DictionaryInterface<K, V> {
         @Override
         public V next() {
             if (hasNext()) {
-                wasNextCalled = true;
                 nextPosition++;
                 return valueList.getEntry(nextPosition);
             } else {
